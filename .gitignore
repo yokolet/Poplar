@@ -1,4 +1,6 @@
 .classpath
 .project
 .settings
+.idea
 lib/.idea
+tmp
