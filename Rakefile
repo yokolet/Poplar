@@ -1,11 +1,12 @@
 # -*- ruby -*-
-
-require 'rubygems'
+require 'java'
 require 'rake/javaextensiontask'
 
 Rake::JavaExtensionTask.new('commons/math/fraction') do |ext|
-  jruby_home = ENV['MY_RUBY_HOME'] # this is available of rvm
-  jars = ["#{jruby_home}/lib/jruby.jar"] + FileList['lib/*.jar']
+  jars = FileList['lib/*.jar']
   ext.classpath = jars.map {|x| File.expand_path x}.join ':'
   ext.name = 'commons/math/poplar'
+  ext.debug=true
+  ext.source_version='1.7'
+  ext.target_version='1.7'
 end

@@ -1,4 +1,4 @@
-require 'commons/math/poplar'
+require_relative './poplar'
 require 'commons/math/fraction/fraction'
 
 module Commons

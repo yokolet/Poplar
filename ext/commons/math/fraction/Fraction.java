@@ -11,7 +11,7 @@ import org.jruby.runtime.builtin.IRubyObject;
 
 @JRubyClass(name="Commons::Math::Fraction")
 public class Fraction extends RubyObject {
-    private org.apache.commons.math.fraction.Fraction j_fraction = null;
+    private org.apache.commons.math3.fraction.Fraction j_fraction = null;
     
     @JRubyMethod(name="new", meta = true, rest = true)
     public static IRubyObject rbNew(ThreadContext context, IRubyObject klazz, IRubyObject[] args) {
@@ -28,17 +28,17 @@ public class Fraction extends RubyObject {
         Arity.checkArgumentCount(context.getRuntime(), args, 2, 2);
         int numerator = (Integer) args[0].toJava(Integer.class);
         int denominator = (Integer) args[1].toJava(Integer.class);
-        j_fraction = new org.apache.commons.math.fraction.Fraction(numerator, denominator);
+        j_fraction = new org.apache.commons.math3.fraction.Fraction(numerator, denominator);
     }
     
-    org.apache.commons.math.fraction.Fraction getJFraction() {
+    org.apache.commons.math3.fraction.Fraction getJFraction() {
         return j_fraction;
     }
     
     @JRubyMethod(name = "add!")
     public IRubyObject add_bang(ThreadContext context, IRubyObject other) {
         if (other instanceof Fraction) {
-            org.apache.commons.math.fraction.Fraction other_fraction = ((Fraction)other).getJFraction();
+            org.apache.commons.math3.fraction.Fraction other_fraction = ((Fraction)other).getJFraction();
             j_fraction = j_fraction.add(other_fraction);
             return this;
         } else {
