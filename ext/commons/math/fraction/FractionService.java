@@ -12,11 +12,11 @@ import org.jruby.runtime.load.BasicLibraryService;
 public class FractionService implements BasicLibraryService {
 
     @Override
-    public boolean basicLoad(Ruby runtime) throws IOException {
+    public boolean basicLoad(final Ruby runtime) throws IOException {
         RubyModule commons = runtime.defineModule("Commons");
         RubyModule math = commons.defineModuleUnder("Math");
         RubyModule fractionModule = math.defineModuleUnder("Fraction");
-        RubyClass fraction = fractionModule.defineClassUnder("Fraction", runtime.getObject(), FRACTION_ALLOCATOR);
+        RubyClass fraction = fractionModule.defineClassUnder(Fraction.class.getSimpleName(), runtime.getObject(), FRACTION_ALLOCATOR);
         fraction.defineAnnotatedMethods(Fraction.class);
         return true;
     }

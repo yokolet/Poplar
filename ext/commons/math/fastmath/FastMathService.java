@@ -13,11 +13,11 @@ public class FastMathService implements BasicLibraryService {
     private Ruby runtime;
     
     @Override
-    public boolean basicLoad(Ruby runtime) throws IOException {
+    public boolean basicLoad(final Ruby runtime) throws IOException {
     RubyModule commons = runtime.defineModule("Commons");
     RubyModule math = commons.defineModuleUnder("Math");
     RubyModule fastMathModule = math.defineModuleUnder("FastMath");
-    RubyClass fastMath = fastMathModule.defineClassUnder("FastMath", runtime.getObject(), new ObjectAllocator() {
+    RubyClass fastMath = fastMathModule.defineClassUnder(FastMath.class.getSimpleName(), runtime.getObject(), new ObjectAllocator() {
       public IRubyObject allocate(Ruby runtime, RubyClass rubyClass) {
         return new FastMath(runtime, rubyClass);
       }
