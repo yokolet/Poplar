@@ -1,9 +1,10 @@
 require_relative './poplar'
-require 'commons/math/fraction/fraction'
+
 
 module Commons
   module Math
     module Fraction
+    Java::CommonsMathFraction::FractionService.new.basicLoad(JRuby.runtime)
     end
   end
 end
