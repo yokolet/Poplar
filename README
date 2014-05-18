@@ -1,4 +1,7 @@
 A sample for JRuby extension. 
-See my blog post, http://http://yokolet.blogspot.com/2011/05/extending-jruby.html
+See my blog post, http://yokolet.blogspot.com/2011/05/extending-jruby.html
 
 Of course the purpose of the Fraction class for ruby has been somewhat superseeded with ruby-2.1.0 supporting a very concise syntax for rationals. I am keeping my copy just in case I find cause to work with Apache commons-math (although latterly that seems unlikely).
+
+
+Actually I've found another reason to keep this I've updated the extesion not to use a separate Service class.
