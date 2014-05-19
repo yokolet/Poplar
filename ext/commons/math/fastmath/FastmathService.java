@@ -4,6 +4,7 @@ import java.io.IOException;
 import org.jruby.RubyObject;
 import org.jruby.anno.JRubyClass;
 import org.jruby.anno.JRubyMethod;
+import org.jruby.runtime.Arity;
 import org.jruby.runtime.ThreadContext;
 import org.jruby.Ruby;
 import org.jruby.RubyClass;
@@ -44,6 +45,24 @@ public class FastmathService implements BasicLibraryService {
     @JRubyMethod(name = "cos", meta = true)
     public static IRubyObject cos(ThreadContext context, IRubyObject klazz, IRubyObject other) {
       return context.getRuntime().newFloat(org.apache.commons.math3.util.FastMath.cos((Double) other.toJava(Double.class)));
+    }
+
+    @JRubyMethod(name = "asin", meta = true)
+    public static IRubyObject asin(ThreadContext context, IRubyObject klazz, IRubyObject other) {
+      return context.getRuntime().newFloat(org.apache.commons.math3.util.FastMath.asin((Double) other.toJava(Double.class)));
+    }
+    
+    @JRubyMethod(name = "acos", meta = true)
+    public static IRubyObject acos(ThreadContext context, IRubyObject klazz, IRubyObject other) {
+      return context.getRuntime().newFloat(org.apache.commons.math3.util.FastMath.acos((Double) other.toJava(Double.class)));
+    }
+
+    @JRubyMethod(name = "hypot", meta = true, rest = true)
+    public static IRubyObject hypot(ThreadContext context, IRubyObject klazz, IRubyObject[] args) {
+    Arity.checkArgumentCount(context.getRuntime(), args, 2, 2);
+            double x = (double) args[0].toJava(Double.class);
+            double y = (double) args[1].toJava(Double.class);
+      return context.getRuntime().newFloat(org.apache.commons.math3.util.FastMath.hypot(x, y));
     }
   }
   
