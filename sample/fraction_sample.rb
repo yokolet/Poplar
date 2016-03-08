@@ -1,10 +1,10 @@
 require 'java'
 
-$: << '/Users/yoko/Documents/workspace/Poplar/lib'
-require 'commons_math_fraction'
+require_relative '../lib/commons_math_fraction'
 
-f = Commons::Math::Fraction::Fraction.new(1, 1)
+f = Commons::Math::Fraction.new(1, 1)
+
 (2..4).each do |i|
-  f.add!(Commons::Math::Fraction::Fraction.new(1, i))
+  f.add!(Commons::Math::Fraction.new(1, i))
+  puts f
 end
-puts f

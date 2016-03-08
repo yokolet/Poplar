@@ -1,2 +1,4 @@
-require 'commons-math-2.2'
-require 'commons/math/fraction'
+require_relative 'commons-math3-3.6.jar'
+require_relative 'poplar.jar'
+
+Java::ComYokoletFraction::FractionService.new.basicLoad(JRuby.runtime)

@@ -1,11 +1,43 @@
-# -*- ruby -*-
+require_relative 'lib/poplar/version'
 
-require 'rubygems'
-require 'rake/javaextensiontask'
+def create_manifest
+  title =  'Implementation-Title: poplar (java extension for JRubyArt)    '        
+  version =  format('Implementation-Version: %s', Poplar::VERSION)
+  file = File.open('MANIFEST.MF', 'w') do |f|
+    f.puts(title)
+    f.puts(version)
+  end
+end
 
-Rake::JavaExtensionTask.new('commons/math/fraction') do |ext|
-  jruby_home = ENV['MY_RUBY_HOME'] # this is available of rvm
-  jars = ["#{jruby_home}/lib/jruby.jar"] + FileList['lib/*.jar']
-  ext.classpath = jars.map {|x| File.expand_path x}.join ':'
-  ext.name = 'commons/math/poplar'
+task default: [:init, :compile, :test]
+
+desc 'Create Manifest'
+task :init do
+  create_manifest
+end
+
+desc 'Compile'
+task :compile do
+  sh 'mvn package'
+  sh 'mvn dependency:copy'
+  sh 'mv target/poplar.jar lib'
+end
+
+desc 'Document'
+task :javadoc do
+  sh 'mvn javadoc:javadoc'
+end
+
+desc 'Test'
+task :test do
+  sh 'jruby test/fraction_test.rb'
+end
+
+desc 'clean'
+task :clean do
+  Dir['./**/*.%w{jar gem}'].each do |path|
+    puts 'Deleting #{path} ...'
+    File.delete(path)
+  end
+  FileUtils.rm_rf('./target')
 end
