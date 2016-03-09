@@ -14,9 +14,9 @@ project 'poplar' do
 
   issue_management 'https://github.com/jruby/jruby-examples/issues', 'Github'
 
-  source_control( :url => 'https://github.com/jruby/jruby-examples',
-                  :connection => 'scm:git:git://github.com/jruby/jruby-examples.git',
-                  :developer_connection => 'git@github.com:jruby/jruby-examples.git' )
+  source_control( url: 'https://github.com/jruby/jruby-examples',
+                  connection: 'scm:git:git://github.com/jruby/jruby-examples.git',
+                  developer_connection: 'git@github.com:jruby/jruby-examples.git' )
 
   properties( 'source.directory' => 'src',
               'poplar.basedir' => '${project.basedir}',
@@ -33,32 +33,34 @@ project 'poplar' do
   overrides do
     plugin :resources, '2.6'
     plugin :dependency, '2.10' do
-      execute_goals( :id => 'default-cli',
-                     'artifactItems' => [ { 'groupId' =>  'org.apache.commons',
-                                            'artifactId' =>  'commons-math3',
-                                            'version' =>  '3.6',
-                                            'type' =>  'jar',
-                                            'outputDirectory' =>  '${poplar.basedir}/lib' } ] )
+      execute_goals( id: 'default-cli',
+                     artifactItems: [ { groupId:  'org.apache.commons',
+                                        artifactId:  'commons-math3',
+                                        version:  '3.6',
+                                        type:  'jar',
+                                        outputDirectory: '${poplar.basedir}/lib'
+                                      }
+                                    ]
+      )
     end
 
     plugin( :compiler, '3.3',
-            'source' =>  '${maven.compiler.source}',
-            'target' =>  '${maven.compiler.target}' )
+            source: '${maven.compiler.source}',
+            target: '${maven.compiler.target}'
+          )
     plugin( :javadoc, '2.10.3',
-            'detect_offline_links' =>  'false',
-            'links' => [ '${jruby.api}',
-                         '${commons-math.api}' ] )
+            detect_offline_links:  'false',
+            links: [ '${jruby.api}',
+                         '${commons-math.api}' ]
+          )
     plugin( :jar, '2.6',
-            'archive' => {
-              'manifestFile' =>  'MANIFEST.MF'
-            } )
+            archive: { manifestFile: 'MANIFEST.MF' }
+          )
   end
-
 
   build do
     default_goal 'package'
     source_directory '${source.directory}'
     final_name 'poplar'
   end
-
 end
