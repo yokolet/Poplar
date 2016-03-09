@@ -18,7 +18,7 @@ import org.apache.commons.math3.fraction.Fraction;
 public class RubyFraction extends RubyObject {
 
     private static final long serialVersionUID = 4127515380048748616L;
-
+    private final Ruby runtime;
     private Fraction j_fraction = null;
 
     /**
@@ -40,8 +40,9 @@ public class RubyFraction extends RubyObject {
      * @param runtime Ruby
      * @param klass RubyClass
      */
-    public RubyFraction(Ruby runtime, RubyClass klass) {
+    public RubyFraction(Ruby runtime, RubyClass klass) {       
         super(runtime, klass);
+        this.runtime = runtime;
     }
 
     void init(ThreadContext context, IRubyObject[] args) {
@@ -57,18 +58,17 @@ public class RubyFraction extends RubyObject {
 
     /**
      *
-     * @param context ThreadContext
      * @param other IRubyObject
      * @return
      */
     @JRubyMethod(name = "add!")
-    public IRubyObject add_bang(ThreadContext context, IRubyObject other) {
+    public IRubyObject add_bang(IRubyObject other) {
         if (other instanceof RubyFraction) {
             Fraction other_fraction = ((RubyFraction) other).getJFraction();
             j_fraction = j_fraction.add(other_fraction);
             return (RubyObject)this;
         } else {
-            throw context.getRuntime().newArgumentError("argument should be Commons::Math::Fraction type");
+            throw runtime.newArgumentError("argument should be Commons::Math::Fraction type");
         }
     }
 
@@ -80,7 +80,6 @@ public class RubyFraction extends RubyObject {
      */
     @JRubyMethod
     public IRubyObject add(ThreadContext context, IRubyObject other) {
-        Ruby runtime = context.getRuntime();
         if (other instanceof RubyFraction) {
             Fraction other_fraction = ((RubyFraction) other).getJFraction();
             Fraction result = j_fraction.add(other_fraction);
@@ -89,7 +88,7 @@ public class RubyFraction extends RubyObject {
                 runtime.newFixnum(result.getDenominator())
             });
         } else {
-            throw context.getRuntime().newArgumentError("argument should be Commons::Math::Fraction type");
+            throw runtime.newArgumentError("argument should be Commons::Math::Fraction type");
         }
     }
 
@@ -107,7 +106,7 @@ public class RubyFraction extends RubyObject {
             Fraction other_fraction = ((RubyFraction) other).getJFraction();
             result = j_fraction.equals(other_fraction);
         }
-        return RubyBoolean.newBoolean(context.getRuntime(), result);
+        return RubyBoolean.newBoolean(runtime, result);
     }
 
     /**
@@ -124,17 +123,17 @@ public class RubyFraction extends RubyObject {
             Fraction other_fraction = ((RubyFraction) other).getJFraction();
             result = j_fraction.equals(other_fraction);
         }
-        return RubyBoolean.newBoolean(context.getRuntime(), result);
+        return RubyBoolean.newBoolean(runtime, result);
     }
 
     /**
      *
-     * @param context
      * @return
      */
     @JRubyMethod(name = {"to_s", "inspect"})
-    public IRubyObject to_s(ThreadContext context) {
-        return context.getRuntime().newString(j_fraction.toString());
+    @Override
+    public IRubyObject to_s() {
+        return runtime.newString(j_fraction.toString());
     }
 
 }
