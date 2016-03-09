@@ -34,4 +34,19 @@ public class FractionService implements BasicLibraryService {
         fraction.defineAnnotatedMethods(RubyFraction.class);
         return true;
     }
+    
+//    /**
+//     * Alternative since jdk8 using java lambda to replace anonymous ObjectAllocator class
+//     * @param runtime
+//     * @return
+//     * @throws IOException
+//     */
+//    @Override
+//    public boolean basicLoad(Ruby runtime) throws IOException {
+//        RubyModule commons = runtime.defineModule("Commons");
+//        RubyModule math = commons.defineModuleUnder("Math");
+//        RubyClass fraction = math.defineClassUnder("Fraction", runtime.getObject(), (Ruby runtime1, RubyClass klazz) -> new RubyFraction(runtime1, klazz));
+//        fraction.defineAnnotatedMethods(RubyFraction.class);
+//        return true;
+//    }
 }
