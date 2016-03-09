@@ -4,8 +4,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/commons_math_fraction'
 
-
-# Test Bar class functionality using regular 
+# Test Fraction class functionality using regular 
 # Minitest::Test albeit with jruby runtime
 
 class FractionTest < Minitest::Test
