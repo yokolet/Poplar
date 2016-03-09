@@ -16,7 +16,7 @@ import org.jruby.runtime.load.BasicLibraryService;
 public class FractionService implements BasicLibraryService {
 
     /**
-     *
+     * 
      * @param runtime
      * @return
      * @throws IOException
@@ -25,15 +25,13 @@ public class FractionService implements BasicLibraryService {
     public boolean basicLoad(Ruby runtime) throws IOException {
         RubyModule commons = runtime.defineModule("Commons");
         RubyModule math = commons.defineModuleUnder("Math");
-        RubyClass fraction = math.defineClassUnder("Fraction", runtime.getObject(), FRACTION_ALLOCATOR);
+        RubyClass fraction = math.defineClassUnder("Fraction", runtime.getObject(), new ObjectAllocator() {
+            @Override
+            public IRubyObject allocate(Ruby runtime, RubyClass klazz) {
+                return new RubyFraction(runtime, klazz);
+            }
+        });
         fraction.defineAnnotatedMethods(RubyFraction.class);
         return true;
     }
-    
-    private static final ObjectAllocator FRACTION_ALLOCATOR = new ObjectAllocator() {
-        @Override
-        public IRubyObject allocate(Ruby runtime, RubyClass klazz) {
-            return new RubyFraction(runtime, klazz);
-        }
-    };
 }
