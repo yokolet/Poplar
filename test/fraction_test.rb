@@ -35,5 +35,10 @@ class FractionTest < Minitest::Test
     fraction.add!(Commons::Math::Fraction.new(5, 16))
     assert_equal fraction, half, 'failed add_bang test'
   end
+
+  def test_multiply
+    assert_equal(fraction * 4, Commons::Math::Fraction.new(3, 4), 'failed * test')
+    assert_equal(fraction * fraction, Commons::Math::Fraction.new(9, 16), 'failed * test')
+  end
 end
 

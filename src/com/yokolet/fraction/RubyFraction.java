@@ -10,6 +10,8 @@ import org.jruby.runtime.Arity;
 import org.jruby.runtime.ThreadContext;
 import org.jruby.runtime.builtin.IRubyObject;
 import org.apache.commons.math3.fraction.Fraction;
+import org.jruby.RubyFixnum;
+
 /**
  *
  * @author Yoko Harada
@@ -23,7 +25,7 @@ public class RubyFraction extends RubyObject {
 
     /**
      *
-     * @param context ThreadContext 
+     * @param context ThreadContext
      * @param klazz IRubyObject
      * @param args IRubyObject[]
      * @return
@@ -40,7 +42,7 @@ public class RubyFraction extends RubyObject {
      * @param runtime Ruby
      * @param klass RubyClass
      */
-    public RubyFraction(Ruby runtime, RubyClass klass) {       
+    public RubyFraction(Ruby runtime, RubyClass klass) {
         super(runtime, klass);
         this.runtime = runtime;
     }
@@ -66,7 +68,7 @@ public class RubyFraction extends RubyObject {
         if (other instanceof RubyFraction) {
             Fraction other_fraction = ((RubyFraction) other).getJFraction();
             j_fraction = j_fraction.add(other_fraction);
-            return (RubyObject)this;
+            return (RubyObject) this;
         } else {
             throw runtime.newArgumentError("argument should be Commons::Math::Fraction type");
         }
@@ -74,6 +76,7 @@ public class RubyFraction extends RubyObject {
 
     /**
      * This method uses java name as ruby name.
+     *
      * @param context ThreadContext
      * @param other IRubyObject
      * @return
@@ -83,12 +86,34 @@ public class RubyFraction extends RubyObject {
         if (other instanceof RubyFraction) {
             Fraction other_fraction = ((RubyFraction) other).getJFraction();
             Fraction result = j_fraction.add(other_fraction);
-            return (RubyObject)RubyFraction.rbNew(context, other.getMetaClass(), new IRubyObject[]{
+            return (RubyObject) RubyFraction.rbNew(context, other.getMetaClass(), new IRubyObject[]{
                 runtime.newFixnum(result.getNumerator()),
                 runtime.newFixnum(result.getDenominator())
             });
         } else {
             throw runtime.newArgumentError("argument should be Commons::Math::Fraction type");
+        }
+    }
+
+    /**
+     * This method uses '*' ruby name. It is not really an operator in ruby
+     * But we preserve the convention in the java method
+     * @param context ThreadContext
+     * @param other IRubyObject should be Fixnum or Fraction
+     * @return
+     */
+    @JRubyMethod(name = "*")
+    public IRubyObject op_multiply(ThreadContext context, IRubyObject other) {
+        if (other instanceof RubyFraction) {
+            Fraction other_fraction = ((RubyFraction) other).getJFraction();
+            j_fraction = j_fraction.multiply(other_fraction);
+            return (RubyObject) this;
+        } else if (other instanceof RubyFixnum) {
+            int other_fixnum = (int)((RubyFixnum) other).getIntValue();
+            j_fraction = j_fraction.multiply(other_fixnum);
+            return (RubyObject) this;
+        } else {
+            throw runtime.newArgumentError("argument should be Commons::Math::Fraction type or Fixnum");
         }
     }
 
