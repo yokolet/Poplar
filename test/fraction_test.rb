@@ -41,4 +41,3 @@ class FractionTest < Minitest::Test
     assert_equal(fraction * fraction, Commons::Math::Fraction.new(9, 16), 'failed * test')
   end
 end
-

@@ -1,3 +1,5 @@
+# encoding: utf-8
+# frozen_string_literal: false
 require_relative 'lib/poplar/version'
 
 def create_manifest
@@ -9,11 +11,16 @@ def create_manifest
   end
 end
 
-task default: [:init, :compile, :test]
+task default: [:init, :compile, :test, :gem]
 
 desc 'Create Manifest'
 task :init do
   create_manifest
+end
+
+desc 'Build gem'
+task :gem do
+  sh 'gem build poplar.gemspec' 
 end
 
 desc 'Compile'
@@ -40,4 +47,5 @@ task :clean do
     File.delete(path)
   end
   FileUtils.rm_rf('./target')
+  FileUtils.rm('MANIFEST.MF')
 end
