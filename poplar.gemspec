@@ -2,6 +2,7 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'poplar/version'
+require 'rake'
 
 Gem::Specification.new do |gem|
   gem.name          = 'poplar'
@@ -14,6 +15,8 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{Just for demo purposes has been superceded by Rational.}
   gem.homepage      = 'https://github.com/monkstone/Poplar'
   gem.files         = `git ls-files`.split($/)
+  gem.files << 'lib/poplar.jar'
+  gem.files << 'lib/commons-math3-3.6.jar'
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ['lib']

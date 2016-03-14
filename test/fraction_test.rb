@@ -2,7 +2,7 @@ gem 'minitest' # don't use bundled minitest
 require 'java'
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative '../lib/commons_math_fraction'
+require_relative '../lib/poplar'
 
 # Test Fraction class functionality using regular 
 # Minitest::Test albeit with jruby runtime
