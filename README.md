@@ -88,7 +88,7 @@ project 'poplar' do
   end
 end
 ```
-If you are using the Eclipse folder convention be sure to specify `source.directory` directory above as `src/main/java` otherwise the code will not compile. This `pom.rb` requires a `MANIFEST.MF` to create the jar see `Rakefile` below that creates it dynamically:-
+If you are using the Eclipse folder convention be sure to specify `source.directory` directory above as `src/main/java` otherwise the code will not compile. This `pom.rb` requires a `MANIFEST.MF` to create the jar see the `Rakefile` below that creates it dynamically:-
 ```ruby
 # encoding: utf-8
 # frozen_string_literal: false
