@@ -9,7 +9,7 @@ MANIFEST.MF
 ```
 ### Creating the java source
 
-The java source should live in a `src` folder (if you use Eclipse as your java ide you may wish to stick to their convention) but for others create your java packages directly under `src` it is simpler.
+The java source should live in a `src` folder (if you use Eclipse as your java ide you may wish to stick to their convention) but for others create your java packages directly under `src` it is simpler. See [wiki](https://github.com/jruby/jruby/wiki/Method-Signatures-and-Annotations-in-JRuby-extensions) for a guide to annotations and java signatures of jruby extensions
 
 ### Using a polyglot maven build
 
