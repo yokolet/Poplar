@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.authors       = ['yokolet', 'monkstone']
   gem.email         = ['martin_p@lineone.net']
   gem.description   = %q{Example JRuby Extension}
-  gem.summary       = %q{Just for demo purposes has been superceded by Rational.}
+  gem.summary       = %q{Just for demo purposes has been superseded by Rational.}
   gem.homepage      = 'https://github.com/monkstone/Poplar'
   gem.files         = `git ls-files`.split($/)
   gem.files << 'lib/poplar.jar'
