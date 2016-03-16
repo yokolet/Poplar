@@ -24,7 +24,7 @@ To enable polyglot maven build you should create a `.mvn` folder in the root of 
   </extension>
 </extensions>
 ```
-Update the version as appropriate, the inclusion of this file means that you are able to use `pom.rb` in place of `pom.xml` to control your maven build. Here is the `pom.rb` for this project:-
+Update the version as appropriate, the inclusion of this file means that you are able to use `pom.rb` in place of `pom.xml` to control your maven build. Here is the `pom.rb` for this project. Which uses jruby and commons-math-library jars during the build, further it allows for the copying of the commons-math-library into the project:-
 
 ```ruby
 project 'poplar' do
@@ -88,7 +88,7 @@ project 'poplar' do
   end
 end
 ```
-If you are using the Eclipse folder convention be sure to specify `source.directory` directory above as `src/main/java` otherwise the code will not compile. This `pom.rb` requires a `MANIFEST.MF` to create the jar see the `Rakefile` below that creates it dynamically:-
+If you are using the Eclipse folder convention be sure to specify `source.directory` directory above as `src/main/java` otherwise the code will not compile. This `pom.rb` requires a `MANIFEST.MF` to create the jar see the `Rakefile` below that creates it dynamically. The `mvn dependency:copy` copies the maths-commons-library jar into the project:-
 ```ruby
 # encoding: utf-8
 # frozen_string_literal: false
@@ -141,4 +141,13 @@ task :clean do
   FileUtils.rm_rf('./target')
   FileUtils.rm('MANIFEST.MF')
 end
+```
+### Gemspec
+The gemspec file is much as you have become used to, except you need to specifically include the jars into the gem, and you should specify java runtime.
+```ruby
+gem.files << 'lib/poplar.jar'
+gem.files << 'lib/commons-math3-3.6.jar
+...
+gem.platform='java'
+```
 ```
