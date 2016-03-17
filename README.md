@@ -1,6 +1,6 @@
 ## A Example JRuby extension. 
 
-This is an example of creating a jruby extension as a github project (other version control are available), but is convenient to use github. First you create your gem project in the normal way. But you will probably want modify your `.gitignore` to exclude temporary and `binary` artifacts as follows:-
+This is an example of creating a jruby extension as a github project _other version control are available_, but is convenient to use github. First you create your gem project in the normal way. But you will probably want modify your `.gitignore` to exclude temporary and `binary` artifacts as follows:-
 
 ```bash
 target
