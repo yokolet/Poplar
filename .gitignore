@@ -3,4 +3,8 @@
 .settings
 .idea
 lib/.idea
-tmp
+target
+*~
+*.jar
+*.gem
+MANIFEST.MF
