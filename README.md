@@ -150,4 +150,3 @@ gem.files << 'lib/commons-math3-3.6.jar
 ...
 gem.platform='java'
 ```
-```
