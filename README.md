@@ -24,7 +24,7 @@ To enable polyglot maven build you should create a `.mvn` folder in the root of 
   </extension>
 </extensions>
 ```
-Update the version as appropriate, the inclusion of this file means that you are able to use `pom.rb` in place of `pom.xml` to control your maven build. Here is the `pom.rb` for this project. Which uses jruby and commons-math-library jars during the build, further it allows for the copying of the commons-math-library into the project (into lib folder):-
+Update the version as appropriate, the inclusion of this file means that you are able to use `pom.rb` in place of `pom.xml` to control your maven build. Here is the `pom.rb` for this project. Which uses jruby and commons-math-library jars during the build, further it allows for the copying of the commons-math-library into the project:-
 
 ```ruby
 project 'poplar' do
@@ -88,7 +88,7 @@ project 'poplar' do
   end
 end
 ```
-If you are using the Eclipse folder convention be sure to specify `source.directory` directory above as `'src/main/java'` otherwise the code will not compile. This `pom.rb` requires a `MANIFEST.MF` to create the jar see the `Rakefile` below that creates it dynamically. The `mvn dependency:copy` copies the maths-commons-library jar into the project:-
+If you are using the Eclipse folder convention be sure to specify `source.directory` directory above as `'src/main/java'` otherwise the code will not compile. This `pom.rb` requires a `MANIFEST.MF` to create the jar see the `Rakefile` below that creates it dynamically. The `mvn dependency:copy` copies the maths-commons-library jar into the into lib directory:-
 ```ruby
 # encoding: utf-8
 # frozen_string_literal: false
