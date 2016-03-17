@@ -143,7 +143,7 @@ task :clean do
 end
 ```
 ### Gemspec
-The gemspec file is much as you have become used to, except you need to specifically include the jars into the gem (otherwise our `.gitignore` excludes them), and you should also specify java platform.
+The gemspec file is much as you have become used to, except you need to specifically include the jars into the gem (otherwise our `.gitignore` excludes them), and you should also specify platform as java.
 ```ruby
 gem.files << 'lib/poplar.jar'
 gem.files << 'lib/commons-math3-3.6.jar
