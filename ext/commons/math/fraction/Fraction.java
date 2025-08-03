@@ -11,11 +11,12 @@ import org.jruby.runtime.builtin.IRubyObject;
 
 @JRubyClass(name="Commons::Math::Fraction")
 public class Fraction extends RubyObject {
+    private static final long serialVersionUID = 1L;
     private org.apache.commons.math.fraction.Fraction j_fraction = null;
     
     @JRubyMethod(name="new", meta = true, rest = true)
     public static IRubyObject rbNew(ThreadContext context, IRubyObject klazz, IRubyObject[] args) {
-        Fraction fraction = (Fraction) ((RubyClass)klazz).allocate();
+        Fraction fraction = (Fraction) ((RubyClass)klazz).allocate(context);
         fraction.init(context, args);
         return fraction;
     }
@@ -25,9 +26,9 @@ public class Fraction extends RubyObject {
     }
     
     void init(ThreadContext context, IRubyObject[] args) {
-        Arity.checkArgumentCount(context.getRuntime(), args, 2, 2);
-        int numerator = (Integer) args[0].toJava(Integer.class);
-        int denominator = (Integer) args[1].toJava(Integer.class);
+        Arity.checkArgumentCount(context, args, 2, 2);
+        int numerator = args[0].toJava(Integer.class);
+        int denominator = args[1].toJava(Integer.class);
         j_fraction = new org.apache.commons.math.fraction.Fraction(numerator, denominator);
     }
     
