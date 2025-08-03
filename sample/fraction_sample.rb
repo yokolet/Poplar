@@ -1,6 +1,7 @@
 require 'java'
+require 'pathname'
 
-$: << '/Users/yoko/Documents/workspace/Poplar/lib'
+$: << Pathname.new(__dir__).join("..", "lib")
 require 'commons_math_fraction'
 
 f = Commons::Math::Fraction::Fraction.new(1, 1)
